@@ -23,27 +23,28 @@
     		var isFormValid = true;
     		var accessCode = "pageid986790jkkz9hjq@yf@fzn@f7k4@fggg@fy6@nzrqf@fy@f";
     		$("input[type=text],input[type=checkbox],select,input[type=radio],input[type=password],textarea").each(function () {    			
-    			actualName = $(this).attr("actualname"); 
-    			actualFieldName = $(this).attr("actualfieldname");
-    			fieldType = $(this).attr("type");
-    			var fName = $(this).attr("name");
-    			var fValue =  jQuery.trim($(this).val());
-    			if ($(this)[0].tagName.toLowerCase() == "select") {
+    		jQuery_1_12_1("input.cma[type=text],input.cma[type=checkbox],select.cma,input.cma[type=radio],input.cma[type=password],textarea.cma").each(function () {    			
+    			actualName = jQuery_1_12_1(this).attr("actualname"); 
+    			actualFieldName = jQuery_1_12_1(this).attr("actualfieldname");
+    			fieldType = jQuery_1_12_1(this).attr("type");
+    			var fName = jQuery_1_12_1(this).attr("name");
+    			var fValue =  jQuery_1_12_1.trim(jQuery_1_12_1(this).val());
+    			if (jQuery_1_12_1(this)[0].tagName.toLowerCase() == "select") {
     				fieldType = "select";
     			}
-    			else if ($(this)[0].tagName.toLowerCase() == "textarea") {
+    			else if (jQuery_1_12_1(this)[0].tagName.toLowerCase() == "textarea") {
     				fieldType = "textarea";
     			}
 
-    			if ($(this).attr("isrequired") == null)
+    			if (jQuery_1_12_1(this).attr("isrequired") == null)
     				isRequired = false;
     			else
     				isRequired = true;
 
     			if (fieldType == 'radio') {
-    				if ($(this).is(':checked')) {
-    					fName = $(this).attr('id').substring(0, $(this).attr('id').indexOf("_"));
-    					fValue = $('input[name=' + $(this).attr("name") + ']:checked').val(); 
+    				if (jQuery_1_12_1(this).is(':checked')) {
+    					fName = jQuery_1_12_1(this).attr('id').substring(0, jQuery_1_12_1(this).attr('id').indexOf("_"));
+    					fValue = jQuery_1_12_1('input[name=' + jQuery_1_12_1(this).attr("name") + ']:checked').val(); 
     						fieldName = fieldName + fName + ",";
     						fieldValue = fieldValue + "'" + fValue + "',";
     						fieldNamesWithValues.push({
@@ -52,11 +53,11 @@
     				}
     			}
     			else if (fieldType == 'checkbox') {
-    				var isChecked = $(this).is(':checked');
+    				var isChecked = jQuery_1_12_1(this).is(':checked');
     				if (isRequired && !isChecked) {
     					alert(actualName + " is a required field");
     					{
-    						$(this).focus();
+    						jQuery_1_12_1(this).focus();
     						isFormValid = false;
     						return false;
     					}
@@ -86,10 +87,10 @@
     				}
     			}
     			else if (fieldType == 'select') {
-    				if (isRequired && $(this)[0].selectedIndex == 0) {
+    				if (isRequired && jQuery_1_12_1(this)[0].selectedIndex == 0) {
     					alert(actualName + " is a required field");
     					{
-    						$(this).focus();
+    						jQuery_1_12_1(this).focus();
     						isFormValid = false;
     						return false;
     					}
@@ -110,11 +111,11 @@
     				}
     			}
     			else if (fieldType == 'textarea') {
-    				maxLength = $(this).attr("mlength");
+    				maxLength = jQuery_1_12_1(this).attr("mlength");
     				if (isRequired && fValue.trim() == '') {
     					alert(actualName + " is a required field");
     					{
-    						$(this).focus();
+    						jQuery_1_12_1(this).focus();
     						isFormValid = false;
     						return false;
     					}
@@ -123,7 +124,7 @@
     					if (maxLength != null) {
     						alert(actualName + " Should not exceed " + maxLength + " characters.");
     						{
-    							$(this).focus();
+    							jQuery_1_12_1(this).focus();
     							isFormValid = false;
     							return false;
     						}
@@ -138,11 +139,11 @@
     				}
     			}
     			else if (fieldType == 'password') {
-    				maxLength = $(this).attr("mlength");
+    				maxLength = jQuery_1_12_1(this).attr("mlength");
     				if (isRequired && fValue.trim() == '') {
     					alert(actualName + " is a required field");
     					{
-    						$(this).focus();
+    						jQuery_1_12_1(this).focus();
     						isFormValid = false;
     						return false;
     					}
@@ -166,11 +167,11 @@
     				}
     			}
     			else if (fieldType == "text") {
-    				maxLength =$(this).attr("mlength");
+    				maxLength = jQuery_1_12_1(this).attr("mlength");
     				if (isRequired && fValue.trim() == '') {
     					alert(actualName + " is a required field");
     					{
-    						$(this).focus();
+    						jQuery_1_12_1(this).focus();
     						isFormValid = false;
     						return false;
     					}
@@ -179,7 +180,7 @@
     					if (maxLength != null) {
     						alert(actualName + " Should not exceed " + maxLength + " characters.");
     						{
-    							$(this).focus();
+    							jQuery_1_12_1(this).focus();
     							isFormValid = false;
     							return false;
     						}
@@ -189,7 +190,7 @@
     					if (fValue.trim() != '') {
     						if (isDate(fValue) == false) {
     							{
-    								$(this).focus();
+    								jQuery_1_12_1(this).focus();
     								isFormValid = false;
     								return false;
     							}
@@ -225,7 +226,7 @@
     		});
     		if (isFormValid) {
     			var url = "https://login.cmadvantage.co.uk/externalformsubmission/ExternalResourceService.asmx"; 
-    			$.ajax({
+    			jQuery_1_12_1.ajax({
     				type: "POST",
     				url: url + "/SubscriberFormSubmitData",
     				data: JSON.stringify({ EmailAddress: emailAddress, FieldName: fieldName, FieldValue: fieldValue, PasswordValue: pwdValue, AccessCode: accessCode, JsonFields:JSON.stringify(fieldNamesWithValues) }),
@@ -336,21 +337,38 @@
     	}
     	function OnSuccessCall(response) {
     		if (response.d.indexOf('ERROR') > -1) {
-    			alert(response.d);
+    			Swal.fire(
+                       'Hmmm, something is not right',
+                       response.d,
+                       'danger',
+                    )
     		}
     		else {
     			if (response.d.indexOf('http') > -1) {
-    				window.location.href = response.d;
+                    Swal.fire(
+                       'Good job!',
+                       'You are now subscribed to MY Locanda!',
+                       'success',
+                    )
     			}
     			else {
-    				alert(response.d);
+                    Swal.fire(
+                       'Hmmm, something is not right',
+                       response.d,
+                       'danger',
+                    )
     			}
     		}
     	}
     	function OnErrorCall(request, error) {
-    		alert(request.responseText)
+            Swal.fire(
+                       'Sorry!',
+                       request.responseText,
+                       'danger',
+                    )
     	}
-    </script>
+    
+</script>
 </head>
 
 <table id='templatestart'>
