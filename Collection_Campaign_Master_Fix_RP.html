@@ -1,15 +1,21 @@
 <head>
     <title></title>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
-    <script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script language="javascript" type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script language="javascript" type="text/javascript">
-    	$(function () {
-    		$("[datepicker]").datepicker({ dateFormat: "dd/mm/yy" });
+<script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js">
+</script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+<script language="javascript" type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+var jQuery_1_12_1 = jQuery.noConflict(true);
+</script>
+<script language="javascript" type="text/javascript">
+    	jQuery_1_12_1(function () {
+    		jQuery_1_12_1("[datepicker]").datepicker({ dateFormat: "dd/mm/yy" });
     	});
-    </script>	
+    
+</script>	
     <script type="text/javascript">    	 
-    	$(document).on('click', '#btnSubmit', function (event) {
+    	jQuery_1_12_1(document).on('click', '#btnSubmit', function (event) {
     		var fieldName = '';
     		var fieldValue = '';
     		var emailAddress = '';   
@@ -22,28 +28,28 @@
     		var fieldNamesWithValues = [];
     		var isFormValid = true;
     		var accessCode = "pageid986790jkkz9hjq@yf@fzn@f7k4@fggg@fy6@nzrqf@fy@f";
-    		$("input[type=text],input[type=checkbox],select,input[type=radio],input[type=password],textarea").each(function () {    			
-    			actualName = $(this).attr("actualname"); 
-    			actualFieldName = $(this).attr("actualfieldname");
-    			fieldType = $(this).attr("type");
-    			var fName = $(this).attr("name");
-    			var fValue =  jQuery.trim($(this).val());
-    			if ($(this)[0].tagName.toLowerCase() == "select") {
+    		jQuery_1_12_1("input.cma[type=text],input.cma[type=checkbox],select.cma,input.cma[type=radio],input.cma[type=password],textarea.cma,select.cma").each(function () {    			
+    			actualName = jQuery_1_12_1(this).attr("actualname"); 
+    			actualFieldName = jQuery_1_12_1(this).attr("actualfieldname");
+    			fieldType = jQuery_1_12_1(this).attr("type");
+    			var fName = jQuery_1_12_1(this).attr("name");
+    			var fValue =  jQuery.trim(jQuery_1_12_1(this).val());
+    			if (jQuery_1_12_1(this)[0].tagName.toLowerCase() == "select") {
     				fieldType = "select";
     			}
-    			else if ($(this)[0].tagName.toLowerCase() == "textarea") {
+    			else if (jQuery_1_12_1(this)[0].tagName.toLowerCase() == "textarea") {
     				fieldType = "textarea";
     			}
 
-    			if ($(this).attr("isrequired") == null)
+    			if (jQuery_1_12_1(this).attr("isrequired") == null)
     				isRequired = false;
     			else
     				isRequired = true;
 
     			if (fieldType == 'radio') {
-    				if ($(this).is(':checked')) {
-    					fName = $(this).attr('id').substring(0, $(this).attr('id').indexOf("_"));
-    					fValue = $('input[name=' + $(this).attr("name") + ']:checked').val(); 
+    				if (jQuery_1_12_1(this).is(':checked')) {
+    					fName = jQuery_1_12_1(this).attr('id').substring(0, jQuery_1_12_1(this).attr('id').indexOf("_"));
+    					fValue = jQuery_1_12_1('input[name=' + jQuery_1_12_1(this).attr("name") + ']:checked').val(); 
     						fieldName = fieldName + fName + ",";
     						fieldValue = fieldValue + "'" + fValue + "',";
     						fieldNamesWithValues.push({
@@ -52,11 +58,11 @@
     				}
     			}
     			else if (fieldType == 'checkbox') {
-    				var isChecked = $(this).is(':checked');
+    				var isChecked = jQuery_1_12_1(this).is(':checked');
     				if (isRequired && !isChecked) {
     					alert(actualName + " is a required field");
     					{
-    						$(this).focus();
+    						jQuery_1_12_1(this).focus();
     						isFormValid = false;
     						return false;
     					}
@@ -86,10 +92,10 @@
     				}
     			}
     			else if (fieldType == 'select') {
-    				if (isRequired && $(this)[0].selectedIndex == 0) {
+    				if (isRequired && jQuery_1_12_1(this)[0].selectedIndex == 0) {
     					alert(actualName + " is a required field");
     					{
-    						$(this).focus();
+    						jQuery_1_12_1(this).focus();
     						isFormValid = false;
     						return false;
     					}
@@ -110,11 +116,11 @@
     				}
     			}
     			else if (fieldType == 'textarea') {
-    				maxLength = $(this).attr("mlength");
+    				maxLength = jQuery_1_12_1(this).attr("mlength");
     				if (isRequired && fValue.trim() == '') {
     					alert(actualName + " is a required field");
     					{
-    						$(this).focus();
+    						jQuery_1_12_1(this).focus();
     						isFormValid = false;
     						return false;
     					}
@@ -123,7 +129,7 @@
     					if (maxLength != null) {
     						alert(actualName + " Should not exceed " + maxLength + " characters.");
     						{
-    							$(this).focus();
+    							jQuery_1_12_1(this).focus();
     							isFormValid = false;
     							return false;
     						}
@@ -138,11 +144,11 @@
     				}
     			}
     			else if (fieldType == 'password') {
-    				maxLength = $(this).attr("mlength");
+    				maxLength = jQuery_1_12_1(this).attr("mlength");
     				if (isRequired && fValue.trim() == '') {
     					alert(actualName + " is a required field");
     					{
-    						$(this).focus();
+    						jQuery_1_12_1(this).focus();
     						isFormValid = false;
     						return false;
     					}
@@ -166,11 +172,11 @@
     				}
     			}
     			else if (fieldType == "text") {
-    				maxLength =$(this).attr("mlength");
+    				maxLength = jQuery_1_12_1(this).attr("mlength");
     				if (isRequired && fValue.trim() == '') {
     					alert(actualName + " is a required field");
     					{
-    						$(this).focus();
+    						jQuery_1_12_1(this).focus();
     						isFormValid = false;
     						return false;
     					}
@@ -179,7 +185,7 @@
     					if (maxLength != null) {
     						alert(actualName + " Should not exceed " + maxLength + " characters.");
     						{
-    							$(this).focus();
+    							jQuery_1_12_1(this).focus();
     							isFormValid = false;
     							return false;
     						}
@@ -189,7 +195,7 @@
     					if (fValue.trim() != '') {
     						if (isDate(fValue) == false) {
     							{
-    								$(this).focus();
+    								jQuery_1_12_1(this).focus();
     								isFormValid = false;
     								return false;
     							}
@@ -225,7 +231,7 @@
     		});
     		if (isFormValid) {
     			var url = "https://login.cmadvantage.co.uk/externalformsubmission/ExternalResourceService.asmx"; 
-    			$.ajax({
+    			jQuery_1_12_1.ajax({
     				type: "POST",
     				url: url + "/SubscriberFormSubmitData",
     				data: JSON.stringify({ EmailAddress: emailAddress, FieldName: fieldName, FieldValue: fieldValue, PasswordValue: pwdValue, AccessCode: accessCode, JsonFields:JSON.stringify(fieldNamesWithValues) }),
@@ -352,7 +358,7 @@
     	}
     </script>
 </head>
-
+<div class="gform_body">
 <table id='templatestart'>
         <tbody>     
 <tr>             
@@ -378,7 +384,7 @@
 <span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">&nbsp;
 </span>
 <span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">
-<select id="C26842" name="C26842" aria-label="Select title" value="" title="" actualname="Salutation">
+<select  id="C26842" name="C26842" class="cma" aria-label="Select title" value="" title="" actualname="Salutation">
 <option value=''></option>
 <option value='Mr.' >Mr.</option>
 <option value='Mrs.' >Mrs.</option>
@@ -419,7 +425,7 @@
 <span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">&nbsp;
 </span>
 <span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">
-<input type="text" id="C26840" name="C26840" value="" title="" actualname="FirstName" mlength="255" style="border-radius: 2px; border-width: 1px; height: 15px; width: 68.4211%;">
+<input type="text" class="cma" id="C26840" name="C26840" value="" title="" actualname="FirstName" mlength="255" style="border-radius: 2px; border-width: 1px; height: 15px; width: 68.4211%;">
 </span>
 <span style="color:red">&nbsp;*&nbsp;
 </span>
@@ -447,7 +453,7 @@
 <span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">Last Name&nbsp;
 </span>
 <span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">
-<input type="text" id="C26841" name="C26841" value="" title="" actualname="Last" mlength="255" isrequired="Yes" style="border-radius: 2px; border-width: 1px; height: 15px; width: 61.0108%;">
+<input type="text" class="cma" id="C26841" name="C26841" value="" title="" actualname="Last" mlength="255" isrequired="Yes" style="border-radius: 2px; border-width: 1px; height: 15px; width: 61.0108%;">
 </span><span style="color:red">&nbsp;*&nbsp;
 </span>
 <span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">&nbsp;
@@ -480,7 +486,7 @@
 <span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">&nbsp;
 </span>
 <span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">
-<input type="text" id="EmailAddress" name="EmailAddress" value="" isrequired="Yes" title="Email Address" actualname="Email" address="" mlength="200" style="border-radius: 2px; border-width: 1px; height: 15px; width: 21.6667%;">
+<input type="text" class="cma"  id="EmailAddress" name="EmailAddress" value="" isrequired="Yes" title="Email Address" actualname="Email" address="" mlength="200" style="border-radius: 2px; border-width: 1px; height: 15px; width: 21.6667%;">
 <span style="color:red">&nbsp;*&nbsp;
 </span>
 </span>
@@ -504,7 +510,7 @@
 <span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">Country&nbsp;
 </span>
 <span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">
-<select id="C26854" aria-label="Select Country" name="C26854" value="" title="" actualname="Country">
+<select  class="cma" id="C26854"  aria-label="Select Country" name="C26854" value="" title="" actualname="Country">
    <option selected value="">Country (Optional)</option>
    <option value="United Kingdom">United Kingdom</option>
    <option value="Afganistan">Afghanistan</option>
@@ -786,7 +792,7 @@
 <tr>
 <td valign="top" align="left" style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px; text-align: justify; line-height: 20px;" class="tempPadding">
 <span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">
-<input type="checkbox" id="C26863" name="C26863" value="" title="" actualname="Marketing" isrequired="Yes" consent="" mlength="255" style="border-radius: 2px; border-width: 1px; height: 15px;">
+<input type="checkbox" class="cma"  id="C26863" name="C26863" value="" title="" actualname="Marketing" isrequired="Yes" consent="" mlength="255" style="border-radius: 2px; border-width: 1px; height: 15px;">
 <label for="C26863"> I have read and accepted the <a href="https://www.chevalcollection.com/data-protection/" target="_blank">privacy policy</a></label><span style="color:red">&nbsp;*&nbsp;
 </span>
 </span>
@@ -802,55 +808,55 @@
 <!------ End Data Privacy ------>  
                           
 <!------ Start HIDDEN All Collection Interest ------> 
-<input type="hidden" id="C26849" name="C26849" value="YES" title="" actualname="All" crl="" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
+<input type="text" class="cma" style="display: none;" id="C26849" name="C26849" value="YES" title="" actualname="All" crl="" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
 <!------ End HIDDEN All Collection ------> 
                           
 <!------ Start HIDDEN Cheval Three Quays Interest ------> 
-<input type="hidden" id="C26846" name="C26846" value="YES" title="" actualname="CTQ" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
+<input type="hidden" class="cma"  id="C26846" name="C26846" value="YES" title="" actualname="CTQ" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
 <!------ End HIDDEN Cheval Three Quays ------> 
 
 <!------ Start HIDDEN Cheval Thorney Court Interest ------> 
-<input type="hidden" id="C26844" name="C26844" value="YES" title="" actualname="CTC" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
+<input type="hidden" class="cma"  class="cma"  id="C26844" name="C26844" value="YES" title="" actualname="CTC" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
 <!------ End HIDDEN Cheval Thorney Court ------> 
                           
 <!------ Start HIDDEN Cheval Hyde Park Gate Interest ------>   
-<input type="hidden" id="C26845" name="C26845" value="YES" title="" actualname="CHPG" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
+<input type="hidden" class="cma"  id="C26845" name="C26845" value="YES" title="" actualname="CHPG" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
 <!------ End HIDDEN Cheval Hyde Park Gate ------>                          
 
 <!------ Start HIDDEN Cheval Phoenix House Interest ------>   
-<input type="hidden" id="C26847" name="C26847" value="YES" title="" actualname="CPH" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
+<input type="hidden" class="cma"  id="C26847" name="C26847" value="YES" title="" actualname="CPH" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
 <!------ End HIDDEN Cheval Phoenix House ------>
 
 <!------ Start HIDDEN Cheval Knightsbridge Interest ------>                          
-<input type="hidden" id="C26848" name="C26848" value="YES" title="" actualname="CK" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
+<input type="hidden" class="cma"  id="C26848" name="C26848" value="YES" title="" actualname="CK" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
 <!------ End HIDDEN Cheval Knightsbridge ------>
                           
 <!------ Start HIDDEN Cheval Harrington Court Interest ------> 
-<input type="hidden" id="C26850" name="C26850" value="YES" title="" actualname="CHC" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
+<input type="hidden" class="cma"  id="C26850" name="C26850" value="YES" title="" actualname="CHC" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
 <!------ End HIDDEN Cheval Harrington Court ------>
  
 <!------ Start HIDDEN Cheval Gloucester Park Interest ------> 
-<input type="hidden" id="C26851" name="C26851" value="YES" title="" actualname="CGP" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
+<input type="hidden" class="cma"  class="cma"  id="C26851" name="C26851" value="YES" title="" actualname="CGP" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
 <!------ End HIDDEN Cheval Gloucester Park ------>                          
 
 <!------ Start HIDDEN Cheval Calico House Interest ------> 
-<input type="hidden" id="C26852" name="C26852" value="YES" title="" actualname="CCH" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
+<input type="hidden" class="cma"  id="C26852" name="C26852" value="YES" title="" actualname="CCH" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
 <!------ End HIDDEN Cheval Calico House ------>
 
 <!------ Start HIDDEN Cheval The Edinburgh Grand Interest ------>       
-<input type="hidden" id="C26858" name="C26858" value="YES" title="" actualname="CTEG" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
+<input type="hidden" class="cma" id="C26858" name="C26858" value="YES" title="" actualname="CTEG" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
 <!------ End HIDDEN Cheval Old Town Chambers Interest ------>
                                 
 <!------ Start HIDDEN Cheval Old Town Chambers Interest ------> 
-<input type="hidden" id="C26859" name="C26859" value="YES" title="" actualname="COTC" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
+<input type="hidden" class="cma"  id="C26859" name="C26859" value="YES" title="" actualname="COTC" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
 <!------ End HIDDEN Cheval Old Town Chambers Interest ------>
                           
 <!------ Start HIDDEN Cheval Abbey Strand Interest ------>  
-<input type="hidden" id="C26860" name="C26860" value="YES" title="" actualname="CASAAH" mlength="255" style="border-radius: 2px; border-width: 0.980114px; height: 15.0398px; width: 21.6718%;">
+<input type="hidden" class="cma"  id="C26860" name="C26860" value="YES" title="" actualname="CASAAH" mlength="255" style="border-radius: 2px; border-width: 0.980114px; height: 15.0398px; width: 21.6718%;">
 <!------ End HIDDEN Cheval Abbey Strand Interest ------>  
 
 <!------ Start HIDDEN Lexham Gardens Interest ------>  
-<input type="hidden" id="C26862" name="C26862" value="YES" title="" actualname="LGBCM" mlength="255" style="border-radius: 2px; border-width: 0.980114px; height: 15.0398px; width: 21.6718%;">
+<input type="hidden" class="cma"  id="C26862" name="C26862" value="YES" title="" actualname="LGBCM" mlength="255" style="border-radius: 2px; border-width: 0.980114px; height: 15.0398px; width: 21.6718%;">
 <!------ End HIDDEN Lexham Gardens Interest ------>
                           
 <tr>
@@ -871,3 +877,4 @@
 </tr>
 </tbody>     
 </table>
+</div>
