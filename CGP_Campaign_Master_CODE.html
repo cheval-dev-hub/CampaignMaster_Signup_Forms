@@ -1,0 +1,855 @@
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        .form-select{
+        padding: 1.3rem 1.2rem 1rem;
+    border: 1px solid #6a1a41;
+    color: #2e2e2e;
+    font-size: 14px;
+        }
+        .form-control{
+            font-size: 14px;
+        }
+        .gform_button{
+            background-color: #6a1a41;
+    color: #fff;
+    display: inline-block;
+    font-size: 1.6rem;
+    line-height: 1em;
+    font-weight: 300;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 2rem 3.6rem;
+    position: relative;
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+        }
+        .swal2-styled.swal2-confirm{
+            background-color: #6a1a41;
+        }
+        .swal2-actions:not(.swal2-loading) .swal2-styled:hover{
+            background-color: #6a1a41;
+        }
+    </style>
+    <script>
+        const tzid = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        console.log(tzid);
+        function setValue(id,newvalue) {
+  var s= document.getElementById(id);
+  s.value = newvalue;
+}    
+window.onload=function() {
+    document.getElementById("C26867").setAttribute("value", tzid);
+  var timeField = document.getElementById("C26867");
+  console.log("value: ", timeField);
+}
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js">
+    </script>
+    <script language="javascript" type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@9"></script> 
+    <script type="text/javascript">
+    var jQuery_1_12_1 = jQuery.noConflict(true);
+    </script>
+    <script language="javascript" type="text/javascript">
+            jQuery_1_12_1(function () {
+                jQuery_1_12_1("[datepicker]").datepicker({ dateFormat: "dd/mm/yy" });
+            });
+        
+    </script>	
+    <script type="text/javascript">    	 
+    	jQuery_1_12_1(document).on('click', '#btnSubmit', function (event) {
+    		var fieldName = '';
+    		var fieldValue = '';
+    		var emailAddress = '';   
+    		var isRequired = false;
+    		var actualName = "";
+    		var actualFieldName = "";
+    		var maxLength = 0;
+    		var fieldType = '';
+    		var pwdValue = '';
+    		var fieldNamesWithValues = [];
+    		var isFormValid = true;
+    		var accessCode = "pageid986790jkkz9hjq@yf@fzn@f7k4@fggg@fy6@nzrqf@fy@f";
+    		jQuery_1_12_1("input.cma[type=text],input.cma[type=checkbox],select.cma,input.cma[type=radio],input.cma[type=password],textarea.cma,select.cma").each(function () {    			
+    			actualName = jQuery_1_12_1(this).attr("actualname"); 
+    			actualFieldName = jQuery_1_12_1(this).attr("actualfieldname");
+    			fieldType = jQuery_1_12_1(this).attr("type");
+    			var fName = jQuery_1_12_1(this).attr("name");
+    			var fValue =  jQuery.trim(jQuery_1_12_1(this).val());
+    			if (jQuery_1_12_1(this)[0].tagName.toLowerCase() == "select") {
+    				fieldType = "select";
+    			}
+    			else if (jQuery_1_12_1(this)[0].tagName.toLowerCase() == "textarea") {
+    				fieldType = "textarea";
+    			}
+
+    			if (jQuery_1_12_1(this).attr("isrequired") == null)
+    				isRequired = false;
+    			else
+    				isRequired = true;
+
+    			if (fieldType == 'radio') {
+    				if (jQuery_1_12_1(this).is(':checked')) {
+    					fName = jQuery_1_12_1(this).attr('id').substring(0, jQuery_1_12_1(this).attr('id').indexOf("_"));
+    					fValue = jQuery_1_12_1('input[name=' + jQuery_1_12_1(this).attr("name") + ']:checked').val(); 
+    						fieldName = fieldName + fName + ",";
+    						fieldValue = fieldValue + "'" + fValue + "',";
+    						fieldNamesWithValues.push({
+    							CustomFieldID: fName, FieldValue: fValue
+    						}); 
+    				}
+    			}
+    			else if (fieldType == 'checkbox') {
+    				var isChecked = jQuery_1_12_1(this).is(':checked');
+    				if (isRequired && !isChecked) {
+    					alert(actualName + " is a required field");
+    					{
+    						jQuery_1_12_1(this).focus();
+    						isFormValid = false;
+    						return false;
+    					}
+    				}
+    				else { 
+    					if (isChecked) {
+    						fieldName = fieldName + fName + ",";
+    						if (fName == 'IsActive' || fName == 'IsVerified')
+    							fieldValue = fieldValue + "'" + "1" + "'" + ",";
+    						else
+    							fieldValue = fieldValue + "'" + "Yes" + "'" + ",";
+
+    						fieldNamesWithValues.push({
+    							CustomFieldID: fName, FieldValue: "Yes"
+    						});
+    					}
+    					else {
+    						fieldName = fieldName + fName + ",";
+    						if (fName == 'IsActive' || fName == 'IsVerified')
+    							fieldValue = fieldValue + "'" + "0" + "'" + ",";
+    						else
+    							fieldValue = fieldValue + "'" + "No" + "'" + ",";
+    						fieldNamesWithValues.push({
+    							CustomFieldID: fName, FieldValue: "No"
+    						});
+    					}
+    				}
+    			}
+    			else if (fieldType == 'select') {
+    				if (isRequired && jQuery_1_12_1(this)[0].selectedIndex == 0) {
+    					alert(actualName + " is a required field");
+    					{
+    						jQuery_1_12_1(this).focus();
+    						isFormValid = false;
+    						return false;
+    					}
+    				}
+    				else {
+    					fieldName = fieldName + fName + ",";
+    					if (fValue.toLowerCase() == "empty") {
+    						fieldValue = fieldValue + "Null" + ",";
+    						fieldNamesWithValues.push({
+    							CustomFieldID: fName, FieldValue: "Null"
+    						});
+    					}
+    					else
+    						fieldValue = fieldValue + "'" +fValue.replace(/'/g, "''") + "'" + ",";
+    					fieldNamesWithValues.push({
+    						CustomFieldID: fName, FieldValue: fValue
+    					});
+    				}
+    			}
+    			else if (fieldType == 'textarea') {
+    				maxLength = jQuery_1_12_1(this).attr("mlength");
+    				if (isRequired && fValue.trim() == '') {
+    					alert(actualName + " is a required field");
+    					{
+    						jQuery_1_12_1(this).focus();
+    						isFormValid = false;
+    						return false;
+    					}
+    				}
+    				else if (fValue.length > maxLength) {
+    					if (maxLength != null) {
+    						alert(actualName + " Should not exceed " + maxLength + " characters.");
+    						{
+    							jQuery_1_12_1(this).focus();
+    							isFormValid = false;
+    							return false;
+    						}
+    					}
+    				}
+    				else {
+    					fieldName = fieldName + fName + ",";
+    					fieldValue = fieldValue + "'" + fValue.replace(/'/g, "''") + "'" + ",";
+    					fieldNamesWithValues.push({
+    						CustomFieldID: fName, FieldValue: fValue
+    					});
+    				}
+    			}
+    			else if (fieldType == 'password') {
+    				maxLength = jQuery_1_12_1(this).attr("mlength");
+    				if (isRequired && fValue.trim() == '') {
+    					alert(actualName + " is a required field");
+    					{
+    						jQuery_1_12_1(this).focus();
+    						isFormValid = false;
+    						return false;
+    					}
+    				}
+    				else if (fValue.length > 0) {    					
+    						fieldName = fieldName + fName + ",";
+    						fieldValue = fieldValue + "'PasswordEncrypt'" + ",";
+    						pwdValue = encodeURIComponent(fValue);
+    						fieldNamesWithValues.push({
+    							CustomFieldID: fName, FieldValue: fValue
+    						});
+    				}
+    				else {
+
+    					fieldName = fieldName + fName + ",";
+    					fieldValue = fieldValue + "'PasswordEncrypt'" + ",";
+    					pwdValue = encodeURIComponent(fValue);
+    					fieldNamesWithValues.push({
+    						CustomFieldID: fName, FieldValue:fValue
+    					});
+    				}
+    			}
+    			else if (fieldType == "text") {
+    				maxLength = jQuery_1_12_1(this).attr("mlength");
+    				if (isRequired && fValue.trim() == '') {
+    					alert(actualName + " is a required field");
+    					{
+    						jQuery_1_12_1(this).focus();
+    						isFormValid = false;
+    						return false;
+    					}
+    				}
+    				else if (fName != "EmailAddress" && actualFieldName != "datefield" && fValue.length > maxLength) {
+    					if (maxLength != null) {
+    						alert(actualName + " Should not exceed " + maxLength + " characters.");
+    						{
+    							jQuery_1_12_1(this).focus();
+    							isFormValid = false;
+    							return false;
+    						}
+    					}
+    				}
+    				else if (actualFieldName == "datefield") {
+    					if (fValue.trim() != '') {
+    						if (isDate(fValue) == false) {
+    							{
+    								jQuery_1_12_1(this).focus();
+    								isFormValid = false;
+    								return false;
+    							}
+    						}
+    						else {
+    							fieldName = fieldName + fName + ","
+    							var Array = fValue.split('/')
+    							var dt = '' 
+    								var mn = Array[1].length == 1 ? "0" + Array[1] : Array[1];
+    								var dy = Array[0].length == 1 ? "0" + Array[0] : Array[0];
+    								dt = Array[2] + "-" + mn + "-" + dy;
+    							 
+    							fieldValue = fieldValue + "'" + dt + "'" + ",";
+    							fieldNamesWithValues.push({
+    								CustomFieldID: fName, FieldValue: dt
+    							});
+    						}
+    					}
+    				}
+    				else {
+    					if (fName == "EmailAddress") { 
+    						emailAddress = fValue;    						 
+    					}
+    					
+    						fieldName = fieldName + fName+ ","
+    						fieldValue = fieldValue + "'" + fValue.replace(/'/g, "''") + "'" + ",";
+    					
+    						fieldNamesWithValues.push({
+    							CustomFieldID: fName, FieldValue: fValue
+    						});
+    				}
+    			}
+    		});
+    		if (isFormValid) {
+    			var url = "https://login.cmadvantage.co.uk/externalformsubmission/ExternalResourceService.asmx"; 
+    			jQuery_1_12_1.ajax({
+    				type: "POST",
+    				url: url + "/SubscriberFormSubmitData",
+    				data: JSON.stringify({ EmailAddress: emailAddress, FieldName: fieldName, FieldValue: fieldValue, PasswordValue: pwdValue, AccessCode: accessCode, JsonFields:JSON.stringify(fieldNamesWithValues) }),
+    				contentType: "application/json; charset=utf-8",
+    				dataType: "json",
+    				success: OnSuccessCall,
+    				error: OnErrorCall
+    			});
+    		} 
+    	});
+    	function checkSpecialCase(emailText) {
+    		var ratval = true;
+
+    		if (emailText.match(/_@/g) != null && emailText.match(/_@/g)[0] != null) {
+    			ratval = false;
+    		}
+    		else if (emailText.match(/@_/g) != null && emailText.match(/@_/g)[0] != null) {
+    			ratval = false;
+    		}
+    		else if (emailText.match(/'@/g) != null && emailText.match(/'@/g)[0] != null) {
+    			ratval = false;
+    		}
+    		else if (emailText.match(/@'/g) != null && emailText.match(/@'/g)[0] != null) {
+    			ratval = false;
+    		}
+    		else if (emailText.match(/@-/g) != null && emailText.match(/@-/g)[0] != null) {
+    			ratval = false;
+    		}
+    		else if (emailText.match(/-@/g) != null && emailText.match(/-@/g)[0] != null) {
+    			ratval = false;
+    		}
+    		else {
+    			ratval = true;
+    		}
+
+    		return ratval;
+
+    	}
+    	var dtCh = "/";
+    	var minYear = 1900;
+    	var maxYear = 2100;
+    	function isInteger(s) {
+    		var i;
+    		for (i = 0; i < s.length; i++) {
+    			var c = s.charAt(i);
+    			if (((c < "0") || (c > "9"))) return false;
+    		}
+    		return true;
+    	}
+    	function stripCharsInBag(s, bag) {
+    		var i;
+    		var returnString = "";
+    		for (i = 0; i < s.length; i++) {
+    			var c = s.charAt(i);
+    			if (bag.indexOf(c) == -1) returnString += c;
+    		}
+    		return returnString;
+    	}
+    	function daysInFebruary(year) {
+    		return (((year % 4 == 0) && ((!(year % 100 == 0)) || (year % 400 == 0))) ? 29 : 28);
+    	}
+    	function DaysArray(n) {
+    		for (var i = 1; i <= n; i++) {
+    			this[i] = 31
+    			if (i == 4 || i == 6 || i == 9 || i == 11) { this[i] = 30 }
+    			if (i == 2) { this[i] = 29 }
+    		}
+    		return this
+    	}
+    	function isDate(dtStr) {
+    		var daysInMonth = DaysArray(12)
+    		var pos1 = dtStr.indexOf(dtCh)
+    		var pos2 = dtStr.indexOf(dtCh, pos1 + 1)
+    		var strDay = dtStr.substring(0, pos1)
+    		var strMonth = dtStr.substring(pos1 + 1, pos2)
+
+    		var strYear = dtStr.substring(pos2 + 1)
+    		strYr = strYear
+    		if (strDay.charAt(0) == "0" && strDay.length > 1) strDay = strDay.substring(1)
+    		if (strMonth.charAt(0) == "0" && strMonth.length > 1) strMonth = strMonth.substring(1)
+    		for (var i = 1; i <= 3; i++) {
+    			if (strYr.charAt(0) == "0" && strYr.length > 1) strYr = strYr.substring(1)
+    		}
+    		month = parseInt(strMonth)
+    		day = parseInt(strDay)
+    		year = parseInt(strYr)
+    		if (pos1 == -1 || pos2 == -1) {
+    			alert("The date format should be : dd/mm/yyyy")
+    			return false
+    		}
+    		if (strMonth.length < 1 || month < 1 || month > 12) {
+    			alert("Please enter a valid month")
+    			return false
+    		}
+    		if (strDay.length < 1 || day < 1 || day > 31 || (month == 2 && day > daysInFebruary(year)) || day > daysInMonth[month]) {
+    			alert("Please enter a valid day")
+    			return false
+    		}
+    		if (strYear.length != 4 || year == 0 || year < minYear || year > maxYear) {
+    			alert("Please enter a valid 4 digit year between " + minYear + " and " + maxYear)
+    			return false
+    		}
+    		if (dtStr.indexOf(dtCh, pos2 + 1) != -1 || isInteger(stripCharsInBag(dtStr, dtCh)) == false) {
+    			alert("Please enter a valid date")
+    			return false
+    		}
+    		return true
+    	}
+    	function OnSuccessCall(response) {
+    		if (response.d.indexOf('ERROR') > -1) {
+    			Swal.fire(
+                       'Hmmm, something is not right',
+                       response.d,
+                       'danger',
+                    )
+    		}
+    		else {
+    			if (response.d.indexOf('http') > -1) {
+                    Swal.fire(
+                       'Good job!',
+                       'You are now subscribed to Cheval Collection!',
+                       'success',
+                    )
+    			}
+    			else {
+                    Swal.fire({
+                       title: 'Hmmm, something is not right',
+                       title: response.d,
+                       type:'warning',
+                    })
+    			}
+    		}
+    	}
+    	function OnErrorCall(request, error) {
+            Swal.fire(
+                       'Sorry!',
+                       request.responseText,
+                       'warning',
+                    )
+    	}
+    </script>
+</head>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+<span style="font-family: arial, sans-serif; color: rgb(0, 0, 0); font-size: 14px;">
+<span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">Salutation
+</span>
+</span>
+<span style="font-family: arial, sans-serif; color: rgb(0, 0, 0); font-size: 14px;">
+<span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">&nbsp;
+</span>
+<span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">
+<select  id="C26842" name="C26842" class="form-select cma" aria-label="Select title" value="" title="" actualname="Salutation">
+<option value=''></option>
+<option value='Mr.' >Mr.</option>
+<option value='Mrs.' >Mrs.</option>
+<option value='Miss' >Miss</option>
+<option value='Ms.' >Ms.</option>
+<option value='Dr.' >Dr.</option>
+<option value='Prof.' >Prof.</option>
+<option value='Rev.' >Rev.</option>
+<option value='Rev.' >Other</option>
+</select>
+
+</span>
+<span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">&nbsp;
+</span>
+</span>
+</div>
+
+<!------ End Salutation ------>
+
+<!------ Start First Name ------>
+<div class="col-md-4">
+<span style="font-family: arial, sans-serif; color: rgb(0, 0, 0); font-size: 14px;">
+<span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">First Name
+</span><span style="color:red">&nbsp;*&nbsp;
+</span>
+</span>
+<span style="font-family: arial, sans-serif; color: rgb(0, 0, 0); font-size: 14px;">
+<span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">&nbsp;
+</span>
+<span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">
+<input type="text" class="form-control cma"  id="C26840" name="C26840" value="" title="" actualname="FirstName" mlength="255" isrequired="Yes">
+</span>
+
+<span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">&nbsp;
+</span>
+</span>
+</div>
+<!------ End First Name ------>
+
+<!------ Start Last Name ------>
+<div class="col-md-4">
+<span style="font-family: arial, sans-serif; color: rgb(0, 0, 0); font-size: 14px;">
+<span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">Last Name&nbsp;
+</span><span style="color:red">&nbsp;*&nbsp;
+</span>
+<span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">
+<input type="text" class="form-control cma"  id="C26841" name="C26841" value="" title="" actualname="Last" mlength="255" isrequired="Yes">
+</span>
+<span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">&nbsp;
+</span>
+</span>
+</div>
+</div>
+<!------ End Last Name ------>
+                         
+<!------ Start Email ------>
+<div class="row">
+    <div class="col-md-6">
+<span style="font-family: arial, sans-serif; color: rgb(0, 0, 0); font-size: 14px;">
+<span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">Email
+</span><span style="color:red">&nbsp;*&nbsp;
+</span>
+</span>
+<span style="font-family: arial, sans-serif; color: rgb(0, 0, 0); font-size: 14px;">
+<span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">&nbsp;
+</span>
+<span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">
+<input type="text" class="form-control cma"  id="EmailAddress" name="EmailAddress" value="" isrequired="Yes" title="Email Address" actualname="Email" address="" mlength="200">
+
+</span>
+<span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">&nbsp;
+</span>
+</div>
+</div>
+<!------ End Email ------>
+<div class="row">
+    <div class="col-md-6">
+<!------ Start Country ------>
+<span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">Country&nbsp;
+</span>
+<span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">
+<select  class="cma" style="width: 100%;" id="C26854"  aria-label="Select Country" name="C26854" value="" title="" actualname="Country">
+   <option selected value="">Country (Optional)</option>
+   <option value="United Kingdom">United Kingdom</option>
+   <option value="Afganistan">Afghanistan</option>
+   <option value="Albania">Albania</option>
+   <option value="Algeria">Algeria</option>
+   <option value="American Samoa">American Samoa</option>
+   <option value="Andorra">Andorra</option>
+   <option value="Angola">Angola</option>
+   <option value="Anguilla">Anguilla</option>
+   <option value="Antigua & Barbuda">Antigua & Barbuda</option>
+   <option value="Argentina">Argentina</option>
+   <option value="Armenia">Armenia</option>
+   <option value="Aruba">Aruba</option>
+   <option value="Australia">Australia</option>
+   <option value="Austria">Austria</option>
+   <option value="Azerbaijan">Azerbaijan</option>
+   <option value="Bahamas">Bahamas</option>
+   <option value="Bahrain">Bahrain</option>
+   <option value="Bangladesh">Bangladesh</option>
+   <option value="Barbados">Barbados</option>
+   <option value="Belarus">Belarus</option>
+   <option value="Belgium">Belgium</option>
+   <option value="Belize">Belize</option>
+   <option value="Benin">Benin</option>
+   <option value="Bermuda">Bermuda</option>
+   <option value="Bhutan">Bhutan</option>
+   <option value="Bolivia">Bolivia</option>
+   <option value="Bonaire">Bonaire</option>
+   <option value="Bosnia & Herzegovina">Bosnia & Herzegovina</option>
+   <option value="Botswana">Botswana</option>
+   <option value="Brazil">Brazil</option>
+   <option value="British Indian Ocean Ter">British Indian Ocean Ter</option>
+   <option value="Brunei">Brunei</option>
+   <option value="Bulgaria">Bulgaria</option>
+   <option value="Burkina Faso">Burkina Faso</option>
+   <option value="Burundi">Burundi</option>
+   <option value="Cambodia">Cambodia</option>
+   <option value="Cameroon">Cameroon</option>
+   <option value="Canada">Canada</option>
+   <option value="Canary Islands">Canary Islands</option>
+   <option value="Cape Verde">Cape Verde</option>
+   <option value="Cayman Islands">Cayman Islands</option>
+   <option value="Central African Republic">Central African Republic</option>
+   <option value="Chad">Chad</option>
+   <option value="Channel Islands">Channel Islands</option>
+   <option value="Chile">Chile</option>
+   <option value="China">China</option>
+   <option value="Christmas Island">Christmas Island</option>
+   <option value="Cocos Island">Cocos Island</option>
+   <option value="Colombia">Colombia</option>
+   <option value="Comoros">Comoros</option>
+   <option value="Congo">Congo</option>
+   <option value="Cook Islands">Cook Islands</option>
+   <option value="Costa Rica">Costa Rica</option>
+   <option value="Cote DIvoire">Cote DIvoire</option>
+   <option value="Croatia">Croatia</option>
+   <option value="Cuba">Cuba</option>
+   <option value="Curaco">Curacao</option>
+   <option value="Cyprus">Cyprus</option>
+   <option value="Czech Republic">Czech Republic</option>
+   <option value="Denmark">Denmark</option>
+   <option value="Djibouti">Djibouti</option>
+   <option value="Dominica">Dominica</option>
+   <option value="Dominican Republic">Dominican Republic</option>
+   <option value="East Timor">East Timor</option>
+   <option value="Ecuador">Ecuador</option>
+   <option value="Egypt">Egypt</option>
+   <option value="El Salvador">El Salvador</option>
+   <option value="Equatorial Guinea">Equatorial Guinea</option>
+   <option value="Eritrea">Eritrea</option>
+   <option value="Estonia">Estonia</option>
+   <option value="Ethiopia">Ethiopia</option>
+   <option value="Falkland Islands">Falkland Islands</option>
+   <option value="Faroe Islands">Faroe Islands</option>
+   <option value="Fiji">Fiji</option>
+   <option value="Finland">Finland</option>
+   <option value="France">France</option>
+   <option value="French Guiana">French Guiana</option>
+   <option value="French Polynesia">French Polynesia</option>
+   <option value="French Southern Ter">French Southern Ter</option>
+   <option value="Gabon">Gabon</option>
+   <option value="Gambia">Gambia</option>
+   <option value="Georgia">Georgia</option>
+   <option value="Germany">Germany</option>
+   <option value="Ghana">Ghana</option>
+   <option value="Gibraltar">Gibraltar</option>
+   <option value="Great Britain">Great Britain</option>
+   <option value="Greece">Greece</option>
+   <option value="Greenland">Greenland</option>
+   <option value="Grenada">Grenada</option>
+   <option value="Guadeloupe">Guadeloupe</option>
+   <option value="Guam">Guam</option>
+   <option value="Guatemala">Guatemala</option>
+   <option value="Guinea">Guinea</option>
+   <option value="Guyana">Guyana</option>
+   <option value="Haiti">Haiti</option>
+   <option value="Hawaii">Hawaii</option>
+   <option value="Honduras">Honduras</option>
+   <option value="Hong Kong">Hong Kong</option>
+   <option value="Hungary">Hungary</option>
+   <option value="Iceland">Iceland</option>
+   <option value="Indonesia">Indonesia</option>
+   <option value="India">India</option>
+   <option value="Iran">Iran</option>
+   <option value="Iraq">Iraq</option>
+   <option value="Ireland">Ireland</option>
+   <option value="Isle of Man">Isle of Man</option>
+   <option value="Israel">Israel</option>
+   <option value="Italy">Italy</option>
+   <option value="Jamaica">Jamaica</option>
+   <option value="Japan">Japan</option>
+   <option value="Jordan">Jordan</option>
+   <option value="Kazakhstan">Kazakhstan</option>
+   <option value="Kenya">Kenya</option>
+   <option value="Kiribati">Kiribati</option>
+   <option value="Korea North">Korea North</option>
+   <option value="Korea Sout">Korea South</option>
+   <option value="Kuwait">Kuwait</option>
+   <option value="Kyrgyzstan">Kyrgyzstan</option>
+   <option value="Laos">Laos</option>
+   <option value="Latvia">Latvia</option>
+   <option value="Lebanon">Lebanon</option>
+   <option value="Lesotho">Lesotho</option>
+   <option value="Liberia">Liberia</option>
+   <option value="Libya">Libya</option>
+   <option value="Liechtenstein">Liechtenstein</option>
+   <option value="Lithuania">Lithuania</option>
+   <option value="Luxembourg">Luxembourg</option>
+   <option value="Macau">Macau</option>
+   <option value="Macedonia">Macedonia</option>
+   <option value="Madagascar">Madagascar</option>
+   <option value="Malaysia">Malaysia</option>
+   <option value="Malawi">Malawi</option>
+   <option value="Maldives">Maldives</option>
+   <option value="Mali">Mali</option>
+   <option value="Malta">Malta</option>
+   <option value="Marshall Islands">Marshall Islands</option>
+   <option value="Martinique">Martinique</option>
+   <option value="Mauritania">Mauritania</option>
+   <option value="Mauritius">Mauritius</option>
+   <option value="Mayotte">Mayotte</option>
+   <option value="Mexico">Mexico</option>
+   <option value="Midway Islands">Midway Islands</option>
+   <option value="Moldova">Moldova</option>
+   <option value="Monaco">Monaco</option>
+   <option value="Mongolia">Mongolia</option>
+   <option value="Montserrat">Montserrat</option>
+   <option value="Morocco">Morocco</option>
+   <option value="Mozambique">Mozambique</option>
+   <option value="Myanmar">Myanmar</option>
+   <option value="Nambia">Nambia</option>
+   <option value="Nauru">Nauru</option>
+   <option value="Nepal">Nepal</option>
+   <option value="Netherland Antilles">Netherland Antilles</option>
+   <option value="Netherlands">Netherlands (Holland, Europe)</option>
+   <option value="Nevis">Nevis</option>
+   <option value="New Caledonia">New Caledonia</option>
+   <option value="New Zealand">New Zealand</option>
+   <option value="Nicaragua">Nicaragua</option>
+   <option value="Niger">Niger</option>
+   <option value="Nigeria">Nigeria</option>
+   <option value="Niue">Niue</option>
+   <option value="Norfolk Island">Norfolk Island</option>
+   <option value="Norway">Norway</option>
+   <option value="Oman">Oman</option>
+   <option value="Pakistan">Pakistan</option>
+   <option value="Palau Island">Palau Island</option>
+   <option value="Palestine">Palestine</option>
+   <option value="Panama">Panama</option>
+   <option value="Papua New Guinea">Papua New Guinea</option>
+   <option value="Paraguay">Paraguay</option>
+   <option value="Peru">Peru</option>
+   <option value="Phillipines">Philippines</option>
+   <option value="Pitcairn Island">Pitcairn Island</option>
+   <option value="Poland">Poland</option>
+   <option value="Portugal">Portugal</option>
+   <option value="Puerto Rico">Puerto Rico</option>
+   <option value="Qatar">Qatar</option>
+   <option value="Republic of Montenegro">Republic of Montenegro</option>
+   <option value="Republic of Serbia">Republic of Serbia</option>
+   <option value="Reunion">Reunion</option>
+   <option value="Romania">Romania</option>
+   <option value="Russia">Russia</option>
+   <option value="Rwanda">Rwanda</option>
+   <option value="St Barthelemy">St Barthelemy</option>
+   <option value="St Eustatius">St Eustatius</option>
+   <option value="St Helena">St Helena</option>
+   <option value="St Kitts-Nevis">St Kitts-Nevis</option>
+   <option value="St Lucia">St Lucia</option>
+   <option value="St Maarten">St Maarten</option>
+   <option value="St Pierre & Miquelon">St Pierre & Miquelon</option>
+   <option value="St Vincent & Grenadines">St Vincent & Grenadines</option>
+   <option value="Saipan">Saipan</option>
+   <option value="Samoa">Samoa</option>
+   <option value="Samoa American">Samoa American</option>
+   <option value="San Marino">San Marino</option>
+   <option value="Sao Tome & Principe">Sao Tome & Principe</option>
+   <option value="Saudi Arabia">Saudi Arabia</option>
+   <option value="Senegal">Senegal</option>
+   <option value="Seychelles">Seychelles</option>
+   <option value="Sierra Leone">Sierra Leone</option>
+   <option value="Singapore">Singapore</option>
+   <option value="Slovakia">Slovakia</option>
+   <option value="Slovenia">Slovenia</option>
+   <option value="Solomon Islands">Solomon Islands</option>
+   <option value="Somalia">Somalia</option>
+   <option value="South Africa">South Africa</option>
+   <option value="Spain">Spain</option>
+   <option value="Sri Lanka">Sri Lanka</option>
+   <option value="Sudan">Sudan</option>
+   <option value="Suriname">Suriname</option>
+   <option value="Swaziland">Swaziland</option>
+   <option value="Sweden">Sweden</option>
+   <option value="Switzerland">Switzerland</option>
+   <option value="Syria">Syria</option>
+   <option value="Tahiti">Tahiti</option>
+   <option value="Taiwan">Taiwan</option>
+   <option value="Tajikistan">Tajikistan</option>
+   <option value="Tanzania">Tanzania</option>
+   <option value="Thailand">Thailand</option>
+   <option value="Togo">Togo</option>
+   <option value="Tokelau">Tokelau</option>
+   <option value="Tonga">Tonga</option>
+   <option value="Trinidad & Tobago">Trinidad & Tobago</option>
+   <option value="Tunisia">Tunisia</option>
+   <option value="Turkey">Turkey</option>
+   <option value="Turkmenistan">Turkmenistan</option>
+   <option value="Turks & Caicos Is">Turks & Caicos Is</option>
+   <option value="Tuvalu">Tuvalu</option>
+   <option value="Uganda">Uganda</option>
+   <option value="Ukraine">Ukraine</option>
+   <option value="United Arab Erimates">United Arab Emirates</option>
+   <option value="United States of America">United States of America</option>
+   <option value="Uraguay">Uruguay</option>
+   <option value="Uzbekistan">Uzbekistan</option>
+   <option value="Vanuatu">Vanuatu</option>
+   <option value="Vatican City State">Vatican City State</option>
+   <option value="Venezuela">Venezuela</option>
+   <option value="Vietnam">Vietnam</option>
+   <option value="Virgin Islands (Brit)">Virgin Islands (Brit)</option>
+   <option value="Virgin Islands (USA)">Virgin Islands (USA)</option>
+   <option value="Wake Island">Wake Island</option>
+   <option value="Wallis & Futana Is">Wallis & Futana Is</option>
+   <option value="Yemen">Yemen</option>
+   <option value="Zaire">Zaire</option>
+   <option value="Zambia">Zambia</option>
+   <option value="Zimbabwe">Zimbabwe</option>
+</select>
+ 
+
+
+
+</div>
+</div>
+<!------ End Country ------>
+<br>
+<hr style="color: #6a1a41;">
+                         
+<!------ Start Data Privacy ------>                    
+<span class="cr-sc-subtitle" style="text-align: left;">DATA PRIVACY INFORMATION
+</span>
+<br>
+<span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">
+    <br>
+<input type="checkbox" class="cma"  id="C26863" name="C26863" value="" title="" actualname="Marketing" isrequired="Yes" consent="" mlength="255">
+<label for="C26863"> I have read and accepted the <a href="https://www.chevalcollection.com/data-protection/" target="_blank">privacy policy</a></label><span style="color:red">&nbsp;*&nbsp;
+</span>
+</span>
+
+<span style="color: rgb(0, 0, 0); font-family: arial, sans-serif; font-size: 14px;">&nbsp;
+</span>
+
+<!------ End Data Privacy ------>  
+                          
+<!------ Start HIDDEN All Collection Interest ------> 
+<input type="hidden" class="cma" id="C26849" name="C26849" value="YES" title="" actualname="All" crl="" mlength="255">
+<!------ End HIDDEN All Collection ------> 
+                          
+<!------ Start HIDDEN Cheval Three Quays Interest ------> 
+<input type="hidden" class="cma" id="C26846" name="C26846" value="YES" title="" actualname="CTQ" mlength="255" >
+<!------ End HIDDEN Cheval Three Quays ------> 
+
+<!------ Start HIDDEN Cheval Thorney Court Interest ------> 
+<input type="hidden" class="cma"  class="cma"  id="C26844" name="C26844" value="YES" title="" actualname="CTC" mlength="255">
+<!------ End HIDDEN Cheval Thorney Court ------> 
+                          
+<!------ Start HIDDEN Cheval Hyde Park Gate Interest ------>   
+<input type="hidden" class="cma"  id="C26845" name="C26845" value="YES" title="" actualname="CHPG" mlength="255">
+<!------ End HIDDEN Cheval Hyde Park Gate ------>                          
+
+<!------ Start HIDDEN Cheval Phoenix House Interest ------>   
+<input type="hidden" class="cma"  id="C26847" name="C26847" value="YES" title="" actualname="CPH" mlength="255">
+<!------ End HIDDEN Cheval Phoenix House ------>
+
+<!------ Start HIDDEN Cheval Knightsbridge Interest ------>                          
+<input type="hidden" class="cma"  id="C26848" name="C26848" value="YES" title="" actualname="CK" mlength="255">
+<!------ End HIDDEN Cheval Knightsbridge ------>
+                          
+<!------ Start HIDDEN Cheval Harrington Court Interest ------> 
+<input type="hidden" class="cma"  id="C26850" name="C26850" value="YES" title="" actualname="CHC" mlength="255">
+<!------ End HIDDEN Cheval Harrington Court ------>
+ 
+<!------ Start HIDDEN Cheval Gloucester Park Interest ------> 
+<input type="text" class="cma" style="display: none;"  id="C26851" name="C26851" value="YES" title="" actualname="CGP" mlength="255">
+<!------ End HIDDEN Cheval Gloucester Park ------>                          
+
+<!------ Start HIDDEN Cheval Calico House Interest ------> 
+<input type="hidden" class="cma"  id="C26852" name="C26852" value="YES" title="" actualname="CCH" mlength="255">
+<!------ End HIDDEN Cheval Calico House ------>
+
+<!------ Start HIDDEN Cheval The Edinburgh Grand Interest ------>       
+<input type="hidden" class="cma" id="C26858" name="C26858" value="YES" title="" actualname="CTEG" mlength="255" style="border-radius: 2px; border-width: 0.994318px; height: 15.0114px; width: 21.6681%;">
+<!------ End HIDDEN Cheval Old Town Chambers Interest ------>
+                                
+<!------ Start HIDDEN Cheval Old Town Chambers Interest ------> 
+<input type="hidden" class="cma"  id="C26859" name="C26859" value="YES" title="" actualname="COTC" mlength="255">
+<!------ End HIDDEN Cheval Old Town Chambers Interest ------>
+                          
+<!------ Start HIDDEN Cheval Abbey Strand Interest ------>  
+<input type="hidden" class="cma"  id="C26860" name="C26860" value="YES" title="" actualname="CASAAH" mlength="255">
+<!------ End HIDDEN Cheval Abbey Strand Interest ------>  
+
+<!------ Start HIDDEN Lexham Gardens Interest ------>  
+<input type="hidden" class="cma"  id="C26862" name="C26862" value="YES" title="" actualname="LGBCM" mlength="255">
+<!------ End HIDDEN Lexham Gardens Interest ------>
+
+<input type="text" style="display: none;" class="cma" value="" id="C26867" name="C26867" title="" actualname="Timezone" mlength="255">
+                          
+<div class="row">
+    <div class="col-md-6">
+        <br>
+<input value="Submit" class="gform_button" type="button" id="btnSubmit">
+</div>
+</div>
+
+
+</div>
